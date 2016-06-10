@@ -1,4 +1,5 @@
-﻿using HomeWork2.ClientCore;
+﻿using HomeWork2;
+using HomeWork2.ClientCore;
 using HomeWork2.ProductCore;
 using System;
 using System.Collections;
@@ -14,7 +15,7 @@ namespace Task2
 
         static void Main(string[] args)
         {
-            var list = new Dictionary<Client, Product>();
+            var list = new ClientProductList();
 
             // Наполняем коллекцию
             for (int i = 0; i < 9; i++)
@@ -25,43 +26,36 @@ namespace Task2
             // Выводим на просмотр
             Console.WriteLine("Все покупки");
 
-            foreach (var item in list)
+            foreach (var cpp in list)
             {
-                var cl = item.Key;
-                var pc = item.Value;
-
-                Console.WriteLine(cl.Name + " - " + pc.Name);
+                Console.WriteLine(cpp.Client.Name + " - " + cpp.Product.Name);
             }
 
             Console.WriteLine(new string('-', 25));
 
-            // Категории товаров (дистинкт)
-
-            Console.WriteLine("Покупки совершены в категориях:");
-            var dpc = new List<Product>();
-
-            //list.Values.(ValueType => value)
-
-            foreach (var item in list.Values)
-            {
-                if (!dpc.Contains(item)) dpc.Add(item);
-            }
-
-            foreach (var item in dpc)
-            {
-                Console.WriteLine(item.Name);
-            }
-
-            Console.WriteLine(new string('-', 25));
-
+         
             var oneClient = ClientFactory.GetClient();
+            var prodList = list.GetProducts(oneClient);
 
             // Категории товаров для конкретного клиента
             Console.WriteLine("Клиент \"{0}\" совершил покупки в категориях:", oneClient.Name);
 
-            foreach (var item in list)
+            foreach (var item in prodList)
             {
-                if (item.Key.Id == oneClient.Id) Console.WriteLine(item.Value.Name); 
+                Console.WriteLine(item.Name); 
+            }
+
+            Console.WriteLine(new string('-', 25));
+
+            var oneProduct = ProductFactory.GetProduct();
+            var clientList = list.GetClients(oneProduct);
+
+            // Клиенты, которые купили товар
+            Console.WriteLine("\"{0}\" купили:", oneProduct.Name);
+
+            foreach (var item in clientList)
+            {
+                Console.WriteLine(item.Name);
             }
 
 

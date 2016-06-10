@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="ClientCore\Client.cs" />
     <Compile Include="ClientCore\ClientFactory.cs" />
-    <Compile Include="Collection\ClientProdList.cs" />
+    <Compile Include="Collection\ClientProductList.cs" />
+    <Compile Include="Collection\ClientProductPair.cs" />
     <Compile Include="ProductCore\ProductFactory.cs" />
     <Compile Include="ProductCore\Product.cs" />
     <Compile Include="Program.cs" />

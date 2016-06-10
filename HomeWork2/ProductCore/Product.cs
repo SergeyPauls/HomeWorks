@@ -34,11 +34,16 @@ namespace HomeWork2.ProductCore
 
         public override bool Equals(object obj)
         {
-            Product pc = obj as Product;
+            if (obj == null) return false;
 
-            if (pc == null) return false;
+            return Equals(obj as Product);
+        }
 
-            return pc.Id == this.Id;
+        public bool Equals(Product product)
+        {
+            if (product == null) return false;
+
+            return product.Id == this.Id;
         }
     }
 }

@@ -29,19 +29,25 @@ namespace HomeWork2.ClientCore
         public string Name { set; get; }
 
 
-        //public override int GetHashCode()
-        //{
-        //    return Id;
-        //}
+        public override int GetHashCode()
+        {
+            return Id;
+        }
 
-        //public override bool Equals(object obj)
-        //{
-        //    Client cl = obj as Client;
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
 
-        //    if (cl == null) return false;
+            return Equals(obj as Client);
 
-        //    return cl.Id == this.Id;
-        //}
+        }
+
+        public bool Equals(Client client)
+        {
+            if (client == null) return false;
+
+            return client.Id == this.Id;
+        }
 
     }
 }
